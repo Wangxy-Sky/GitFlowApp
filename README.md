@@ -24,4 +24,23 @@
 5. git merge --no-ff 分支名 反向merge分支并删除合并完的分支
 6. git push origin dev 推送dev分支到远程
 ```
-7. 
+
+## 提测阶段
+1. 切换到开发分支dev `git checkout -b release` 切出预上线版本
+2. 将本地预上线版本release 提交到远程 `git push origin release`
+3. 注意提测后不允许新增功能，可以修改bug，此时不允许大幅度修改
+4. 出现bug修改后release分支为正确分支后将release分支合并到master分支
+6. 注意 release分支作为临时分支用来 修改测试后出现的bug 稳定后合并maser
+
+## 更新开发分支dev
+1. 线上代码为稳定版最新后，同步merge`dev`分支，使dev分支为最新稳定版本
+2. `git checkout dev` + `git merge release`
+3. `git branch -d release` // 删除release 临时测试分支
+
+## 为master打上版本标签
+1. `git checkout master` 切换回master分支
+2. `git pull origin master` 拉取master分支
+3. `git tag -a v2 -m '版本2'` 本地打上版本标签
+4. `git push orgin --tags` 将标签推送到远程
+
+## 上线时 切换版本号代码进行上线
